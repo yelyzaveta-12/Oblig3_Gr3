@@ -1,0 +1,83 @@
+package Oppgave4;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class JUnitTabell {
+    // i) inneholder()
+    @Test
+    void testInneholder() {
+        MengdeADT<Integer> m = new TabellMengde<>();
+
+        m.leggTil(5);
+
+        assertTrue(m.inneholder(5));
+        assertFalse(m.inneholder(10));
+    }
+
+    // ii) erDelmengdeAv()
+    @Test
+    void testErDelmengdeAv() {
+        MengdeADT<Integer> m1 = new TabellMengde<>();
+        MengdeADT<Integer> m2 = new TabellMengde<>();
+
+        m1.leggTil(1);
+        m1.leggTil(2);
+
+        m2.leggTil(1);
+        m2.leggTil(2);
+        m2.leggTil(3);
+
+        assertTrue(m1.erDelmengdeAv(m2));
+        assertFalse(m2.erDelmengdeAv(m1));
+    }
+
+    // iii) erLik()
+    @Test
+    void testErLik() {
+        MengdeADT<Integer> m1 = new TabellMengde<>();
+        MengdeADT<Integer> m2 = new TabellMengde<>();
+
+        m1.leggTil(1);
+        m1.leggTil(2);
+
+        m2.leggTil(1);
+        m2.leggTil(2);
+
+        assertTrue(m1.erLik(m2));
+
+        m2.leggTil(3);
+        assertFalse(m1.erLik(m2));
+    }
+
+    // iv) union()
+    @Test
+    void testUnion() {
+        MengdeADT<Integer> m1 = new TabellMengde<>();
+        MengdeADT<Integer> m2 = new TabellMengde<>();
+
+        m1.leggTil(1);
+        m1.leggTil(2);
+
+        m2.leggTil(2);
+        m2.leggTil(3);
+
+        MengdeADT<Integer> union = m1.union(m2);
+
+        assertTrue(union.inneholder(1));
+        assertTrue(union.inneholder(2));
+        assertTrue(union.inneholder(3));
+    }
+
+    // v) fjern()
+    @Test
+    void testFjern() {
+        MengdeADT<Integer> m = new TabellMengde<>();
+
+        m.leggTil(3);
+        m.fjern(3);
+
+        assertFalse(m.inneholder(3));
+    }
+}
