@@ -16,10 +16,6 @@ public class TabellMengde<T> implements  MengdeADT<T> {
         antall = 0;
     }
 
-    // Utvider tabellen hvis den er full
-    //Creates a new array
-    //Makes it double the size
-    //Copies old elements into it
     private void utvidKapasitet() {
         tabell = Arrays.copyOf(tabell, tabell.length * 2);
     }
@@ -56,7 +52,6 @@ public class TabellMengde<T> implements  MengdeADT<T> {
         }
     }
 
-    //Takes all elements from another set and adds them.
     @Override
     public void leggTilAlleFra(MengdeADT<T> annenMengde) {
         T[] annenTabell = annenMengde.tilTabell();
@@ -66,9 +61,7 @@ public class TabellMengde<T> implements  MengdeADT<T> {
     }
 
     //v
-    //Finds it
-    //Replaces it with the LAST element in array
-    //Decreases antall
+    //Find element, replace it with siste
     @Override
     public T fjern(T element) {
         for (int i = 0; i < antall; i++) {
@@ -85,8 +78,7 @@ public class TabellMengde<T> implements  MengdeADT<T> {
 
 
     //ii)
-    //Are ALL my elements inside the other set?
-    //If even one is missing → return false.
+    //ALL elements must be inside the other set for it to be a delmengde
     @Override
     public boolean erDelmengdeAv(MengdeADT<T> annenMengde) {
         for (int i = 0; i < antall; i++) {
@@ -98,9 +90,6 @@ public class TabellMengde<T> implements  MengdeADT<T> {
     }
 
     //iii)
-    //Two sets are equal if:
-    //They have same number of elements
-    //One is a subset of the other
     @Override
     public boolean erLik(MengdeADT<T> annenMengde) {
         if (antall != annenMengde.antallElementer()) {
@@ -109,8 +98,7 @@ public class TabellMengde<T> implements  MengdeADT<T> {
         return erDelmengdeAv(annenMengde);
     }
 
-    //Do the sets share NO elements?
-    //If even one element is common → return false.
+    //disjunkt = no common elements
     @Override
     public boolean erDisjunkt(MengdeADT<T> annenMengde) {
         for (int i = 0; i < antall; i++) {

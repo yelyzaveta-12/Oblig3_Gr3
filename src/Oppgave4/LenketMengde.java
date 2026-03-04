@@ -13,7 +13,7 @@ public class LenketMengde<T> implements MengdeADT<T> {
         }
     }
 
-    private Node start;
+    private Node foerste;
     private int antall;
 
     @Override
@@ -29,12 +29,12 @@ public class LenketMengde<T> implements MengdeADT<T> {
     //i
     @Override
     public boolean inneholder(T element) {
-        Node current = start;
-        while (current != null) {
-            if (current.data.equals(element)) {
+        Node p = foerste;
+        while (p != null) {
+            if (p.data.equals(element)) {
                 return true;
             }
-            current = current.neste;
+            p = p.neste;
         }
         return false;
     }
@@ -43,8 +43,8 @@ public class LenketMengde<T> implements MengdeADT<T> {
     public void leggTil(T element) {
         if (!inneholder(element)) {
             Node ny = new Node(element);
-            ny.neste = start;
-            start = ny;
+            ny.neste = foerste;
+            foerste = ny;
             antall++;
         }
     }
@@ -59,21 +59,21 @@ public class LenketMengde<T> implements MengdeADT<T> {
     //v
     @Override
     public T fjern(T element) {
-        Node current = start;
+        Node p = foerste;
         Node prev = null;
 
-        while (current != null) {
-            if (current.data.equals(element)) {
+        while (foerste != null) {
+            if (p.data.equals(element)) {
                 if (prev == null) {
-                    start = current.neste;
+                    foerste = p.neste;
                 } else {
-                    prev.neste = current.neste;
+                    prev.neste = p.neste;
                 }
                 antall--;
                 return element;
             }
-            prev = current;
-            current = current.neste;
+            prev = foerste;
+            foerste = foerste.neste;
         }
         return null;
     }
@@ -81,12 +81,12 @@ public class LenketMengde<T> implements MengdeADT<T> {
     //ii
     @Override
     public boolean erDelmengdeAv(MengdeADT<T> annen) {
-        Node current = start;
-        while (current != null) {
-            if (!annen.inneholder(current.data)) {
+        Node p = foerste;
+        while (p != null) {
+            if (!annen.inneholder(p.data)) {
                 return false;
             }
-            current = current.neste;
+            p = p.neste;
         }
         return true;
     }
@@ -100,12 +100,12 @@ public class LenketMengde<T> implements MengdeADT<T> {
 
     @Override
     public boolean erDisjunkt(MengdeADT<T> annen) {
-        Node current = start;
-        while (current != null) {
-            if (annen.inneholder(current.data)) {
+        Node p = foerste;
+        while (p != null) {
+            if (annen.inneholder(p.data)) {
                 return false;
             }
-            current = current.neste;
+            p = p.neste;
         }
         return true;
     }
@@ -113,12 +113,12 @@ public class LenketMengde<T> implements MengdeADT<T> {
     @Override
     public MengdeADT<T> snitt(MengdeADT<T> annen) {
         LenketMengde<T> ny = new LenketMengde<>();
-        Node current = start;
-        while (current != null) {
-            if (annen.inneholder(current.data)) {
-                ny.leggTil(current.data);
+        Node p = foerste;
+        while (p != null) {
+            if (annen.inneholder(p.data)) {
+                ny.leggTil(p.data);
             }
-            current = current.neste;
+            p = p.neste;
         }
         return ny;
     }
@@ -135,12 +135,12 @@ public class LenketMengde<T> implements MengdeADT<T> {
     @Override
     public MengdeADT<T> minus(MengdeADT<T> annen) {
         LenketMengde<T> ny = new LenketMengde<>();
-        Node current = start;
-        while (current != null) {
-            if (!annen.inneholder(current.data)) {
-                ny.leggTil(current.data);
+        Node p = foerste;
+        while (p != null) {
+            if (!annen.inneholder(p.data)) {
+                ny.leggTil(p.data);
             }
-            current = current.neste;
+            p = p.neste;
         }
         return ny;
     }
@@ -148,11 +148,11 @@ public class LenketMengde<T> implements MengdeADT<T> {
     @Override
     public T[] tilTabell() {
         T[] arr = (T[]) new Object[antall];
-        Node current = start;
+        Node p = foerste;
         int i = 0;
-        while (current != null) {
-            arr[i++] = current.data;
-            current = current.neste;
+        while (p != null) {
+            arr[i++] = p.data;
+            p = p.neste;
         }
         return arr;
     }
