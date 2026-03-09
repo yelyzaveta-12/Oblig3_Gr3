@@ -26,9 +26,10 @@ public class Matching {
         Person Lasse = new Person("Lasse",
                 "høre på musikk", "øl", "venner", "gå på tur");
 
-        Person Minnelin = new Person("Minnelin", "");
+        Person Minnelin = new Person("Minnelin", "gaming", "");
 
         Person Helle = new Person ("Helle", "gaming", "");
+
 
         double ab = match(Minnelin, Lasse);
         double ac = match(Helle, Yelyzaveta);
