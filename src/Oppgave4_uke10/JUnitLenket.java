@@ -1,4 +1,4 @@
-package Oppgave4;
+package Oppgave4_uke10;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

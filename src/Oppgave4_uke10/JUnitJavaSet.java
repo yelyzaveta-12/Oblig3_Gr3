@@ -1,31 +1,26 @@
-package Oppgave4;
+package Oppgave4_uke10;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class JUnitTabell {
-
+public class JUnitJavaSet {
 
     //i
     @Test
     void testInneholder() {
-        MengdeADT<Integer> m = new TabellMengde<>();
+        MengdeADT<Integer> m = new JavaSetToMengde<>();
 
         m.leggTil(5);
-        m.leggTil(2);
 
         assertTrue(m.inneholder(5));
-        assertTrue(m.inneholder(2));
         assertFalse(m.inneholder(10));
     }
 
     //ii
     @Test
     void testErDelmengdeAv() {
-        MengdeADT<Integer> m1 = new TabellMengde<>();
-        MengdeADT<Integer> m2 = new TabellMengde<>();
-        MengdeADT<Integer> m3 = new TabellMengde<>();
-        MengdeADT<Integer> m4 = new TabellMengde<>();
+        MengdeADT<Integer> m1 = new JavaSetToMengde<>();
+        MengdeADT<Integer> m2 = new JavaSetToMengde<>();
 
         m1.leggTil(1);
         m1.leggTil(2);
@@ -34,23 +29,15 @@ public class JUnitTabell {
         m2.leggTil(2);
         m2.leggTil(3);
 
-        m3.leggTil(4);
-        m3.leggTil(5);
-        m3.leggTil(6);
-
-        m4.leggTil(6);
-
         assertTrue(m1.erDelmengdeAv(m2));
         assertFalse(m2.erDelmengdeAv(m1));
-
-        assertTrue(m4.erDelmengdeAv(m3));
     }
 
-    //iii)
+    //iii
     @Test
     void testErLik() {
-        MengdeADT<Integer> m1 = new TabellMengde<>();
-        MengdeADT<Integer> m2 = new TabellMengde<>();
+        MengdeADT<Integer> m1 = new JavaSetToMengde<>();
+        MengdeADT<Integer> m2 = new JavaSetToMengde<>();
 
         m1.leggTil(1);
         m1.leggTil(2);
@@ -67,8 +54,8 @@ public class JUnitTabell {
     //iv
     @Test
     void testUnion() {
-        MengdeADT<Integer> m1 = new TabellMengde<>();
-        MengdeADT<Integer> m2 = new TabellMengde<>();
+        MengdeADT<Integer> m1 = new JavaSetToMengde<>();
+        MengdeADT<Integer> m2 = new JavaSetToMengde<>();
 
         m1.leggTil(1);
         m1.leggTil(2);
@@ -86,11 +73,12 @@ public class JUnitTabell {
     //v
     @Test
     void testFjern() {
-        MengdeADT<Integer> m = new TabellMengde<>();
+        MengdeADT<Integer> m = new JavaSetToMengde<>();
 
-        m.leggTil(111);
-        m.fjern(111);
+        m.leggTil(345);
+        m.fjern(345);
 
-        assertFalse(m.inneholder(111));
+        assertFalse(m.inneholder(345));
     }
 }
+
