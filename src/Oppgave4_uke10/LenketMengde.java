@@ -65,7 +65,7 @@ public class LenketMengde<T> implements MengdeADT<T> {
         while (p != null) {
             if (p.data.equals(element)) {
                 if (prev == null) {
-                    p = p.neste;
+                    foerste = p.neste;
                 } else {
                     prev.neste = p.neste;
                 }
