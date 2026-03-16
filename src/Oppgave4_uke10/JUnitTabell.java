@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JUnitTabell {
 
-
-    //i
+    // i
     @Test
     void testInneholder() {
         MengdeADT<Integer> m = new TabellMengde<>();
@@ -19,7 +18,7 @@ public class JUnitTabell {
         assertFalse(m.inneholder(10));
     }
 
-    //ii
+    // ii
     @Test
     void testErDelmengdeAv() {
         MengdeADT<Integer> m1 = new TabellMengde<>();
@@ -46,7 +45,7 @@ public class JUnitTabell {
         assertTrue(m4.erDelmengdeAv(m3));
     }
 
-    //iii)
+    // iii
     @Test
     void testErLik() {
         MengdeADT<Integer> m1 = new TabellMengde<>();
@@ -64,7 +63,7 @@ public class JUnitTabell {
         assertFalse(m1.erLik(m2));
     }
 
-    //iv
+    // iv
     @Test
     void testUnion() {
         MengdeADT<Integer> m1 = new TabellMengde<>();
@@ -83,7 +82,7 @@ public class JUnitTabell {
         assertTrue(union.inneholder(3));
     }
 
-    //v
+    // v
     @Test
     void testFjern() {
         MengdeADT<Integer> m = new TabellMengde<>();
@@ -92,5 +91,79 @@ public class JUnitTabell {
         m.fjern(111);
 
         assertFalse(m.inneholder(111));
+    }
+
+    @Test
+    void testMinus() {
+        MengdeADT<Integer> m1 = new TabellMengde<>();
+        MengdeADT<Integer> m2 = new TabellMengde<>();
+
+        m1.leggTil(1);
+        m1.leggTil(2);
+        m1.leggTil(3);
+
+        m2.leggTil(3);
+        m2.leggTil(4);
+
+        MengdeADT<Integer> minus = m1.minus(m2);
+
+        assertTrue(minus.inneholder(1));
+        assertTrue(minus.inneholder(2));
+        assertFalse(minus.inneholder(3));
+        assertEquals(2, minus.antallElementer());
+    }
+
+    @Test
+    void testMinusIngenFelles() {
+        MengdeADT<Integer> m1 = new TabellMengde<>();
+        MengdeADT<Integer> m2 = new TabellMengde<>();
+
+        m1.leggTil(1);
+        m1.leggTil(2);
+
+        m2.leggTil(3);
+        m2.leggTil(4);
+
+        MengdeADT<Integer> minus = m1.minus(m2);
+
+        assertTrue(minus.inneholder(1));
+        assertTrue(minus.inneholder(2));
+        assertEquals(2, minus.antallElementer());
+    }
+
+    @Test
+    void testLeggTilAlleFra() {
+        MengdeADT<Integer> m1 = new TabellMengde<>();
+        MengdeADT<Integer> m2 = new TabellMengde<>();
+
+        m1.leggTil(1);
+        m1.leggTil(2);
+
+        m2.leggTil(2);
+        m2.leggTil(3);
+        m2.leggTil(4);
+
+        m1.leggTilAlleFra(m2);
+
+        assertTrue(m1.inneholder(1));
+        assertTrue(m1.inneholder(2));
+        assertTrue(m1.inneholder(3));
+        assertTrue(m1.inneholder(4));
+        assertEquals(4, m1.antallElementer());
+    }
+
+    @Test
+    void testLeggTilAlleFraTom() {
+        MengdeADT<Integer> m1 = new TabellMengde<>();
+        MengdeADT<Integer> m2 = new TabellMengde<>();
+
+        m1.leggTil(1);
+        m1.leggTil(2);
+
+        m1.leggTilAlleFra(m2);
+
+        assertTrue(m1.inneholder(1));
+        assertTrue(m1.inneholder(2));
+        assertEquals(2, m1.antallElementer());
     }
 }

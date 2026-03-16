@@ -7,39 +7,38 @@ public class Matching {
         MengdeADT<String> B = b.getHobbyer();
 
         MengdeADT<String> felles = A.snitt(B);
-
         MengdeADT<String> pA = A.minus(B);
         MengdeADT<String> pB = B.minus(A);
-
         MengdeADT<String> totalt = A.union(B);
 
-        //match = felles – (kunA + kunB) / totalt
-
-        return (double) felles.antallElementer() - ((double) (pA.antallElementer() + pB.antallElementer())
-                / totalt.antallElementer());
+        return (double) felles.antallElementer()
+                - ((double) (pA.antallElementer() + pB.antallElementer()) / totalt.antallElementer());
     }
 
     public static void main(String[] args) {
-        Person Yelyzaveta = new Person("Yelyzaveta",
+        Person yelyzaveta = new Person("Yelyzaveta",
                 "gym", "høre på musikk", "gaming");
 
-        Person Lasse = new Person("Lasse",
+        Person lasse = new Person("Lasse",
                 "høre på musikk", "øl", "venner", "gå på tur");
 
-        Person Minnelin = new Person("Minnelin", "gaming", "");
+        Person minnelin = new Person("Minnelin",
+                "gaming", "serier", "trening");
 
-        Person Helle = new Person ("Helle", "gaming", "");
+        double yl = match(yelyzaveta, lasse);
+        double ym = match(yelyzaveta, minnelin);
+        double lm = match(lasse, minnelin);
 
+        System.out.println("Match mellom Yelyzaveta og Lasse = " + yl);
+        System.out.println("Match mellom Yelyzaveta og Minnelin = " + ym);
+        System.out.println("Match mellom Lasse og Minnelin = " + lm);
 
-        double ab = match(Minnelin, Lasse);
-        double ac = match(Helle, Yelyzaveta);
-        double bc = match(Minnelin, Helle);
-        double cb = match(Lasse, Helle);
-
-        System.out.println("Match mellom Minnelin&Lasse = " + ab);
-        System.out.println("Match mellon Helle&Yelyzaveta = " + ac);
-        System.out.println("Match mellom Minnelin&Helle = " + bc);
-        System.out.println("Match mellom Lasse&Helle = " + cb);
+        if (yl >= ym && yl >= lm) {
+            System.out.println("Beste match er Yelyzaveta og Lasse.");
+        } else if (ym >= yl && ym >= lm) {
+            System.out.println("Beste match er Yelyzaveta og Minnelin.");
+        } else {
+            System.out.println("Beste match er Lasse og Minnelin.");
+        }
     }
 }
-
